@@ -65,7 +65,6 @@
 #     # OCR endpoint
 # ]
 
-from django.contrib import admin
 from django.urls import path
 from django.http import JsonResponse
 
@@ -92,7 +91,6 @@ def home_view(request):
     })
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
 
     # Root route - safe for GET
 

@@ -103,12 +103,30 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME':'railway',
+#         'USER': "postgres",
+#         'PASSWORD':"qqKWTWBuKTDBGVBDfVeWMCCWKfNtnQQz",
+#         'HOST': 'postgres-production-4416.up.railway.app',
+#         'PORT': "5432",
+#     }
+# }
+import dj_database_url
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.parse(
+        "postgreSQL://postgres:qqKWTWBuKTDBGVBDfVeWMCCWKfNtnQQz@nozomi.proxy.rlwy.net:54444/railway"
+)
 }
+
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:4000",  # React frontend dev server
