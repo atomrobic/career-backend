@@ -131,6 +131,7 @@ DATABASES = {
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:4000",  # React frontend dev server
     "https://seacareerjob.netlify.app",  # Deployed frontend
+    "*"
 ]
 
 REST_FRAMEWORK = {
