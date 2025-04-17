@@ -11,6 +11,7 @@ from django.utils.timezone import now
 from datetime import timedelta
 
 class CustomUser(AbstractUser):
+    username = models.CharField(max_length=150, unique=True)
     ADMIN = "admin"
     COMPANY_STAFF = "company_staff"
     USER = "user"

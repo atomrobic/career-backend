@@ -94,16 +94,16 @@ def register(request):
 @permission_classes([AllowAny])
 def login(request):
     """
-    Authenticate a user using email and return JWT tokens.
+    Authenticate a user using username and return JWT tokens.
     """
-    email = request.data.get('email')
+    username = request.data.get('username')
     password = request.data.get('password')
     
     try:
-        # Get user by email
-        user = CustomUser.objects.get(email=email)
+        # Get user by username
+        user = CustomUser.objects.get(username=username)
         # Authenticate user
-        user = authenticate(username=user.username, password=password)
+        user = authenticate(username=username, password=password)
         
         if not user:
             return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
@@ -131,7 +131,7 @@ def login(request):
         })
         
     except CustomUser.DoesNotExist:
-        return Response({'error': 'No user found with this email'}, status=status.HTTP_404_NOT_FOUND)
+        return Response({'error': 'No user found with this username'}, status=status.HTTP_404_NOT_FOUND)
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -237,6 +237,7 @@ def profile(request):
         
         print("DELETE: Deleting profile...")
         profile.delete()
+        print(profile)
         print("DELETE: Profile deleted successfully")
         return Response(status=status.HTTP_204_NO_CONTENT)
 # Company Views
