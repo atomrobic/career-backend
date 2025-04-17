@@ -197,8 +197,13 @@ def profile(request):
             
     elif request.method in ['PUT', 'PATCH']:
         if not profile:
-            print(f"{request.method}: Profile not found")
-            return Response({'error': 'Profile not found'}, status=status.HTTP_404_NOT_FOUND)
+            # Create profile if it doesn't exist
+            if user.role == "user":
+                profile = UserProfile.objects.create(user=user)
+            elif user.role == "admin":
+                profile = AdminProfile.objects.create(user=user)
+            elif user.role == "company_staff":
+                profile = CompanyStaffProfile.objects.create(user=user)
         
         update_data = request.data.copy()
         
@@ -210,7 +215,7 @@ def profile(request):
         serializer = serializer_class(
             profile,
             data=update_data,
-            partial=True  # Always use partial update to avoid required field errors
+            partial=True
         )
         
         if serializer.is_valid():
